@@ -15,36 +15,45 @@ eval $(docker-machine env default)
 
 ## Prerequisites
 
-#### Copy docker-compose.yml & other folders/files to symfony-project dir:
+#### This project in your workspace that contains symfony-project:
 
 ```
 .
-├── ReadMe.md
-├── code
-│   └── Dockerfile
-├── config
-│   ├── nginx
-│   │   ├── nginx.conf
-│   │   ├── php54.conf
-│   │   ├── php56.conf
-│   │   └── php70.conf
+├── docker-symfony
+│   ├── ReadMe.md
+│   ├── code
+│   │   └── Dockerfile
+│   ├── config
+│   │   ├── nginx
+│   │   │   ├── nginx.conf
+│   │   │   ├── php54.conf
+│   │   │   ├── php56.conf
+│   │   │   └── php70.conf
+│   │   ├── php54
+│   │   │   ├── php-fpm.conf
+│   │   │   └── symfony.ini
+│   │   ├── php56
+│   │   │   ├── php-fpm.conf
+│   │   │   └── symfony.ini
+│   │   └── php70
+│   │       ├── php-fpm.conf
+│   │       └── symfony.ini
+│   ├── docker-compose.yml
 │   ├── php54
-│   │   ├── php-fpm.conf
-│   │   └── symfony.ini
+│   │   └── Dockerfile
 │   ├── php56
-│   │   ├── php-fpm.conf
-│   │   └── symfony.ini
+│   │   └── Dockerfile
 │   └── php70
-│       ├── php-fpm.conf
-│       └── symfony.ini
-├── docker-compose.yml
-├── php54
-│   └── Dockerfile
-├── php56
-│   └── Dockerfile
-└── php70
-    └── Dockerfile
-
+│       └── Dockerfile
+└── symfony-project
+    ├── README.md
+    ├── app
+    ├── bin
+    ├── composer.json
+    ├── composer.lock
+    ├── src
+    ├── vendor
+    └── web
 ```
 
 #### Customization
@@ -54,7 +63,7 @@ eval $(docker-machine env default)
 app:
   build: code
   volumes:
-    - ./your-custom-symfony-project-folder-name:/symfony
+    - ../your-custom-symfony-project-folder-name:/symfony
 ```
 
 * php running environment:
