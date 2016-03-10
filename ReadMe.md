@@ -42,16 +42,9 @@ eval $(docker-machine env default)
 │   └── Dockerfile
 ├── php56
 │   └── Dockerfile
-├── php70
-│   └── Dockerfile
-└── symfony-project
-    ├── app
-    ├── bin
-    ├── composer.json
-    ├── composer.lock
-    ├── src
-    ├── vendor
-    └── web
+└── php70
+    └── Dockerfile
+
 ```
 
 #### Customization
