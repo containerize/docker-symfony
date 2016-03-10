@@ -1,7 +1,7 @@
 app:
   build: code
   volumes:
-    - ../symfony-project:/symfony
+    - /symfony-project-path:/symfony
 db:
   image: mysql
   ports:

@@ -3,6 +3,7 @@
 
 ## Docker Configuration
 
+### For mac or pc
 #### Install Docker-ToolBox
 [Download Link](https://www.docker.com/products/docker-toolbox)
 
@@ -12,58 +13,18 @@ docker-machine start default
 
 eval $(docker-machine env default)
 ```
+### For linux
+#### Install docker
+[Link](https://docs.docker.com/engine/installation/linux/centos/)
 
 ## Prerequisites
 
-#### This project in your workspace that contains symfony-project:
-
-```
-.
-├── docker-symfony
-│   ├── ReadMe.md
-│   ├── code
-│   │   └── Dockerfile
-│   ├── config
-│   │   ├── nginx
-│   │   │   ├── nginx.conf
-│   │   │   ├── php54.conf
-│   │   │   ├── php56.conf
-│   │   │   └── php70.conf
-│   │   ├── php54
-│   │   │   ├── php-fpm.conf
-│   │   │   └── symfony.ini
-│   │   ├── php56
-│   │   │   ├── php-fpm.conf
-│   │   │   └── symfony.ini
-│   │   └── php70
-│   │       ├── php-fpm.conf
-│   │       └── symfony.ini
-│   ├── docker-compose.yml
-│   ├── php54
-│   │   └── Dockerfile
-│   ├── php56
-│   │   └── Dockerfile
-│   └── php70
-│       └── Dockerfile
-└── symfony-project
-    ├── README.md
-    ├── app
-    ├── bin
-    ├── composer.json
-    ├── composer.lock
-    ├── src
-    ├── vendor
-    └── web
-```
-
-#### Customization
-
-* Change `symfony-project` (by default) name in `docker-compose.yml`
+* Change `/symfony-project-path` in `docker-compose.yml`
 ```
 app:
   build: code
   volumes:
-    - ../your-custom-symfony-project-folder-name:/symfony
+    - /path-to-your-symfony-project-folder-name:/symfony
 ```
 
 * php running environment:
