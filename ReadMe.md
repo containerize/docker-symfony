@@ -1,15 +1,21 @@
-# symfony in docker
+# **Symfony in Docker**
 
 
-# start & config docker machine
+## Docker Configuration
 
+#### Install Docker-ToolBox
+[Download Link](https://www.docker.com/products/docker-toolbox)
+
+#### start & config docker machine
 ```
 docker-machine start default
 
 eval $(docker-machine env default)
 ```
 
-# copy docker-compose.yml & other folders/files to symfony-project dir:
+## Prerequisites
+
+#### copy docker-compose.yml & other folders/files to symfony-project dir:
 
 ```
 .
@@ -39,8 +45,6 @@ eval $(docker-machine env default)
 ├── php70
 │   └── Dockerfile
 └── symfony-project
-    ├── LICENSE
-    ├── README.md
     ├── app
     ├── bin
     ├── composer.json
@@ -50,23 +54,90 @@ eval $(docker-machine env default)
     └── web
 ```
 
-# build
+#### Customization
 
+* Change `symfony-project` (by default) name in `docker-compose.yml`
+```
+app:
+  build: code
+  volumes:
+    - ./your-custom-symfony-project-folder-name:/symfony
+```
+
+* php running environment:
+    * php54 (by default)
+    * if using php56/php70: just ununcomment php56/php70 in `docker-compose.yml` (php56 in demo):
+
+```
+...
+
+php56:
+   build: php56
+   volumes:
+     - ./config/php56/symfony.ini:/usr/local/etc/php/conf.d/symfony.ini
+     - ./config/php56/php-fpm.conf:/etc/php-fpm.conf
+   links:
+     - db
+     - redis
+   volumes_from:
+     - app
+ ...
+
+nginx:
+  image: nginx
+  ports:
+    - 80:80
+  volumes:
+    - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./config/nginx/php54.conf:/etc/nginx/conf.d/php54.conf
+    - ./config/nginx/php56.conf:/etc/nginx/conf.d/php56.conf
+    # - ./config/nginx/php70.conf:/etc/nginx/conf.d/php70.conf
+    - ./config/nginx/logs:/var/log/nginx
+  links:
+    - php54
+    - php56
+    # - php70
+  volumes_from:
+    - app
+```
+
+
+## Deploy symfony in Docker
+
+#### Build
 ```
 docker-compose build
 ```
 
-# deploy
-
+#### Deploy
 ```
 docker-compose up -d
 ```
 
-# command 
-
+#### logs
 ```
-alias sf='docker-compose run php ./app/console'
+docker-compose logs nginx
 ```
 
+
+#### Command
+* run `./app/console` 
+```
+docker-compose run php ./app/console
+```
+* run `./cc`
+```
+docker-compose run php ./cc
+```
+* ...
+
+## Launcher
+
+* Add Hosts (using php54)
+```
+echo "$(docker-machine ip default) php54.symfony.dev" >> /etc/hosts
+```
+
+* Open Browser http://php54.symfony.dev/app_dev.php/admintools
 
 

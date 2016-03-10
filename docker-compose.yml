@@ -55,7 +55,7 @@ nginx:
     - ./config/nginx/logs:/var/log/nginx
   links:
     - php54
-    - php56
-    - php70
+    # - php56
+    # - php70
   volumes_from:
     - app
