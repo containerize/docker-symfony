@@ -6,7 +6,7 @@
 #### Install Docker-ToolBox
 [Download Link](https://www.docker.com/products/docker-toolbox)
 
-#### start & config docker machine
+#### Start & config docker machine
 ```
 docker-machine start default
 
@@ -15,7 +15,7 @@ eval $(docker-machine env default)
 
 ## Prerequisites
 
-#### copy docker-compose.yml & other folders/files to symfony-project dir:
+#### Copy docker-compose.yml & other folders/files to symfony-project dir:
 
 ```
 .
@@ -114,11 +114,43 @@ docker-compose build
 docker-compose up -d
 ```
 
+#### check runing
+```
+docker-compose ps
+```
+
 #### logs
 ```
 docker-compose logs nginx
 ```
+#### db
+* symfony project config:
+    * Modify symfony-project `app/config/parameters.yml` 
+```
+parameters:
+            ...
+            database_host: db
+            redis_host: redis
+            ...
+```
 
+* GUI Connection: IP
+```
+docker-machine ip default
+```
+
+* MySQL_PASSWORD in `docker-compose.yml`:
+```
+db:
+  image: mysql
+  ports:
+    - 3306:3306
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: symfony
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root
+```
 
 #### Command
 * run `./app/console` 
