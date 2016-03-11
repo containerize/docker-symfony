@@ -3,7 +3,6 @@ FROM php:5.4-fpm
 # update
 RUN apt-get update 
 
-
 # extension - except: imagick apc xdebug geoip redis
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev
 RUN docker-php-ext-install iconv mcrypt mysql mysqli pdo pdo_mysql mbstring gd
