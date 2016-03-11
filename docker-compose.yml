@@ -13,6 +13,8 @@ db:
     MYSQL_PASSWORD: root
 redis:
   image: redis
+phptest:
+  build: phptest
 php54:
   build: php54
   volumes:
