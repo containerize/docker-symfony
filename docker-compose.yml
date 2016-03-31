@@ -13,8 +13,6 @@ db:
     MYSQL_PASSWORD: root
 redis:
   image: redis
-phptest:
-  build: phptest
 # php54:
 #   build: php54
 #   volumes:
@@ -56,8 +54,8 @@ nginx:
     # - ./config/nginx/php70.conf:/etc/nginx/conf.d/php70.conf
     - ./config/nginx/logs:/var/log/nginx
   links:
-    - php54
-    # - php56
+    # - php54
+    - php56
     # - php70
   volumes_from:
     - app
